@@ -1,0 +1,14 @@
+function onEdit(e) 
+{
+   if (e.source.getActiveRange().getColumnIndex() == 5){
+   var A = e.source.getActiveSheet().getRange(e.source.getActiveRange().getRowIndex() ,7,1,1);
+
+   A.setValue(new Date())
+  }
+  
+  else if (e.source.getActiveRange().getColumnIndex() == 6){
+  var B = e.source.getActiveSheet().getRange(e.source.getActiveRange().getRowIndex() ,8,1,1);
+  
+    B.setValue(new Date())
+  }
+}
