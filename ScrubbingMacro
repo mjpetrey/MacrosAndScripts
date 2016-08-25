@@ -1,0 +1,52 @@
+'The following two Subs prevent accidentally dragging and dropping cells while working in the file
+Private Sub Workbook_Open()
+Application.CellDragAndDrop = False
+End Sub
+
+Private Sub Workbook_BeforeClose(Cancel As Boolean)
+Application.CellDragAndDrop = True
+End Sub
+
+Sub ScrubbingMacro()
+'This macro removes extra spaces in responses,
+'makes text cells numeric if its able (i.e. fixes 'text' dates),
+'makes selected cells with text be in Proper Case,
+'and runs spellcheck for the selected cells.
+'It only affects the cells selected before running the macro, except for removing extra spaces.
+
+'Makes the macro run faster by not flickering the screen
+    Application.ScreenUpdating = False
+
+'Removes extra spaces from all cells, removes spaces at beginning or end and any extra in the middle
+     Dim X As Long, Z As Long, UR As Range, Arr As Variant
+     Set UR = ActiveSheet.UsedRange
+     Arr = UR.Formula
+     For X = 1 To UBound(Arr)
+         For Z = 1 To UBound(Arr, 2)
+             If Left(Arr(X, Z), 1) <> "=" Then
+                 If Arr(X, Z) Like "*  *" Then
+                     Arr(X, Z) = WorksheetFunction.Trim(Arr(X, Z))
+                 ElseIf Right(Arr(X, Z), 1) = " " Or Left(Arr(X, Z), 1) = " " Then
+                     Arr(X, Z) = Trim(Arr(X, Z))
+                 End If
+             End If
+         Next
+     Next
+     UR = Arr
+
+'Makes cell in selection either be a number or in Proper Case
+    Dim rngeCell As Range
+    For Each rngeCell In Selection.Cells
+    rngeCell = "=IFERROR(VALUE(" & Chr(34) & rngeCell & Chr(34) & "),PROPER(" & Chr(34) & rngeCell & Chr(34) & "))"
+    Next
+    Selection.Copy
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+        
+'Checks spelling in selection
+    Selection.CheckSpelling SpellLang:=5129
+    
+'Clears selection
+    Application.CutCopyMode = False
+    
+End Sub
