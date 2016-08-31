@@ -1,0 +1,419 @@
+function ShootingStar(){
+var SS = SpreadsheetApp.getActive();
+
+//This gets the values from the spreadsheet and names the variables to use later
+var editor = SpreadsheetApp.getActiveSheet().getRange('B1').getValue();
+var interim = SpreadsheetApp.getActiveSheet().getRange('B2').getValue();
+var network = SpreadsheetApp.getActiveSheet().getRange('B3').getValue();
+var sequence = SpreadsheetApp.getActiveSheet().getRange('B4').getValue();
+var stage = SpreadsheetApp.getActiveSheet().getRange('B5').getValue();
+var grade = SpreadsheetApp.getActiveSheet().getRange('B6').getValue();
+var newName = SpreadsheetApp.getActiveSheet().getRange('B10').getValue();
+var lastfolder = SpreadsheetApp.getActiveSheet().getRange('B9').getValue();
+var subject = SpreadsheetApp.getActiveSheet().getRange('B7').getValue();
+var assname = SpreadsheetApp.getActiveSheet().getRange('B8').getValue();
+  //this variable is used to fill in the first two columns of the editor doc
+var templatevalues = [[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],
+                     [assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],
+                     [assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],
+                     [assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],
+                     [assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],
+                     [assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],
+                     [assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],
+                     [assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],
+                     [assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage],[assname,stage]];
+
+//THIS is the logic tree that determines where to save the editor doc and which template to use
+if (subject == 'Math'){
+    if(stage == 'Draft 2'){
+           if (interim == 'A1' || interim == 'A1a' || interim == 'A1b' || interim == 'A1c'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhbzM1SThmdnl0Wkk')}
+      else if (interim == 'A2' || interim == 'A2a' || interim == 'A2b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhVGduRlZLV29aNnM');}
+      else if (interim == 'A3' || interim == 'A3a' || interim == 'A3b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhS3pQaFUzN25MaFk');}
+      else if (interim == 'A4' || interim == 'A4a' || interim == 'A4b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhb3U2Yld4Zmo5ZUk');}
+      else if (interim == 'A5'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhb2trZmNxanBaU3c');}
+      else if (interim == 'A1-A4'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhTXlGbl84UkZZWVU');}
+    }
+   else if(stage == 'Draft 1'){
+           if (interim == 'A1' || interim == 'A1a' || interim == 'A1b' || interim == 'A1c'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhRkg1QnN5UkQzZkE')}
+      else if (interim == 'A2' || interim == 'A2a' || interim == 'A2b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhYkQ5N1VKclliazA');}
+      else if (interim == 'A3' || interim == 'A3a' || interim == 'A3b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhMTYzV0tJRXJXVUE');}
+      else if (interim == 'A4' || interim == 'A4a' || interim == 'A4b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhM0tGTUlyek93LXc');}
+      else if (interim == 'A5'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhY0hlNmZHYWRqUHc');}
+      else if (interim == 'A1-A4'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhMmh4cWVKcTZ6Wlk');}
+    }
+   else if(stage == 'Draft 3'){
+           if (interim == 'A1' || interim == 'A1a' || interim == 'A1b' || interim == 'A1c'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhM084aHBMNUpmTTA')}
+      else if (interim == 'A2' || interim == 'A2a' || interim == 'A2b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhN2xOS3hPenptZmM');}
+      else if (interim == 'A3' || interim == 'A3a' || interim == 'A3b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhd28wTzJ1UldjRXc');}
+      else if (interim == 'A4' || interim == 'A4a' || interim == 'A4b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhZi1NR0pXV1k3QlU');}
+      else if (interim == 'A5'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhXzd2UXNGMzJtQTQ');}
+      else if (interim == 'A1-A4'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhUkJVNVJ4N0daZmM');}
+    }
+   else if(stage == 'Final Draft'){
+           if (interim == 'A1' || interim == 'A1a' || interim == 'A1b' || interim == 'A1c'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhN3hNRHVRV0QxSnc')}
+      else if (interim == 'A2' || interim == 'A2a' || interim == 'A2b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhWTBJdEI5bmpWLWs');}
+      else if (interim == 'A3' || interim == 'A3a' || interim == 'A3b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhdHphWnV1eTVrMmM');}
+      else if (interim == 'A4' || interim == 'A4a' || interim == 'A4b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhcUZUYy1XOVQ1RU0');}
+      else if (interim == 'A5'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhcjZobmNaT3otWUU');}
+      else if (interim == 'A1-A4'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzheWNXRC1WaXFfTWs');}
+    }
+   else if(stage == 'Final Internal Proofed' && (network == 'MB' || network == 'TEI')){
+           if (interim == 'A1' || interim == 'A1a' || interim == 'A1b' || interim == 'A1c'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhWkRUandwRERXOWs')}
+      else if (interim == 'A2' || interim == 'A2a' || interim == 'A2b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhT29TT0dhcWdBb2M');}
+      else if (interim == 'A3' || interim == 'A3a' || interim == 'A3b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhZmNrVV9HZ2F1TUU');}
+      else if (interim == 'A4' || interim == 'A4a' || interim == 'A4b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhZVBSNWM1eTJ3Y1E');}
+      else if (interim == 'A5'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhQmFYSDFUMk1UbjA');}
+      else if (interim == 'A1-A4'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhNVphQ0pGTVNKNnc');}
+    }
+   else if(stage == 'Final Internal Proofed'){
+           if (interim == 'A1' || interim == 'A1a' || interim == 'A1b' || interim == 'A1c'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhLWl0Q2dmR0JzQnM')}
+      else if (interim == 'A2' || interim == 'A2a' || interim == 'A2b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhLXU5R01ydHViR2s');}
+      else if (interim == 'A3' || interim == 'A3a' || interim == 'A3b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhSWZ5cjRVQXBGSnM');}
+      else if (interim == 'A4' || interim == 'A4a' || interim == 'A4b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhQnIwMmFFR1BhbTg');}
+      else if (interim == 'A5'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhZXNsaVhscEQ0Y28');}
+      else if (interim == 'A1-A4'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhYlQ0NTBRYzhITkk');}
+   }
+}
+
+if (subject == 'ELA'){
+    if(interim == 'A5'){throw "A5 is not part of ELA. Please correct your mistake."}
+    if(stage == 'Draft 1'){
+           if (interim == 'A1' || interim == 'A1a' || interim == 'A1b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhV2pRZmVYemJYc2M')}
+      else if (interim == 'A2' || interim == 'A2a' || interim == 'A2b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzha3BGRDk4eUNLZjg');}
+      else if (interim == 'A3' || interim == 'A3a' || interim == 'A3b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhU1pxZHlCZHU3c0k');}
+      else if (interim == 'A4' || interim == 'A4a' || interim == 'A4b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhWHdUZnh4X1lGRWs');}
+      else if (interim == 'A1-A4'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhem9DMDRhcFl0anM');}
+    }
+   else if(stage == 'Draft 2'){
+           if (interim == 'A1' || interim == 'A1a' || interim == 'A1b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhTDJvU0JFWWlzdGM')}
+      else if (interim == 'A2' || interim == 'A2a' || interim == 'A2b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhS0lWeUZfMWR2c0U');}
+      else if (interim == 'A3' || interim == 'A3a' || interim == 'A3b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhaGxKUnFCdmlXdmM');}
+      else if (interim == 'A4' || interim == 'A4a' || interim == 'A4b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhMjZtZU43d0RBSVU');}
+     else if (interim == 'A1-A4'){var savefolder = DocsList.getFolderById('0B3JFyGOgQFPDdXd5bTQtbnFxSXM');}
+    }
+   else if(stage == 'Draft 3'){
+           if (interim == 'A1' || interim == 'A1a' || interim == 'A1b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhTEdBRVBvTFA4LU0')}
+      else if (interim == 'A2' || interim == 'A2a' || interim == 'A2b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhS0FaRVpJMzBNSDQ');}
+      else if (interim == 'A3' || interim == 'A3a' || interim == 'A3b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhM1lIcE1KZTkzTnc');}
+      else if (interim == 'A4' || interim == 'A4a' || interim == 'A4b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhYzFwNG93b3FtRVE');}
+     else if (interim == 'A1-A4'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhdHRDVXl6MWpYTWM');}
+    }
+   else if(stage == 'Final Draft'){
+           if (interim == 'A1' || interim == 'A1a' || interim == 'A1b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhejhBQV8xX3JMZGc')}
+      else if (interim == 'A2' || interim == 'A2a' || interim == 'A2b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhNEZ5MzlDNUpkQm8');}
+      else if (interim == 'A3' || interim == 'A3a' || interim == 'A3b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhQnJ4WGJGMnNGSzg');}
+      else if (interim == 'A4' || interim == 'A4a' || interim == 'A4b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhUGwzUWtLUWpBZ0k');}
+     else if (interim == 'A1-A4'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhanNObnFxTG1iSGM');}
+    }
+   else if(stage == 'Final Internal Proofed' && (network == 'MB' || network == 'TEI')){
+           if (interim == 'A1' || interim == 'A1a' || interim == 'A1b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhcHFXNWJMU2F0VEU')}
+      else if (interim == 'A2' || interim == 'A2a' || interim == 'A2b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhUkNPUGowMUthWDg');}
+      else if (interim == 'A3' || interim == 'A3a' || interim == 'A3b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhcHZzcERNby1Gb1E');}
+      else if (interim == 'A4' || interim == 'A4a' || interim == 'A4b'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzha2hjRGVSRmh4Q2s');}
+     else if (interim == 'A1-A4'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhTE1WWElSczNuSzQ');}
+    }
+   else if(stage == 'Final Internal Proofed'){
+           if (interim == 'A1'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhb2JZcUc2QjNyT1E')}
+      else if (interim == 'A2'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhTjBKWW1iaW1XV2c');}
+      else if (interim == 'A3'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhNDRHRnB1QVlnX2c');}
+      else if (interim == 'A4'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhM3JuS2NRZVVEaEk');}
+     else if (interim == 'A1-A4'){var savefolder = DocsList.getFolderById('0Bziar2xNNFzhM0lxMjUzSDBDYVU');}
+    }
+  }
+  
+  else if (stage == 'Approve to Post'){
+  throw "You're done! There is no need to save an editor doc.";
+}
+  else if (subject == 'Science'){
+  throw "Science does not work at this time. Sorry.";
+}
+
+  
+//Gets the TEI template for TEIs and network template for grades 3-8
+  if (subject == 'Math' && grade == '3-8' && stage == 'Final Internal Proofed'){
+    var newfile = DocsList.getFileById('1rVcaZa2BuMZp79AflDFYAoo9-VzSRnhjcXFIaRUlcS8').makeCopy(newName); //The id here is the id of the 14-15 Math network Fatal Flaw template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 3 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 4 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 5 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 6 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 7 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 8 Edits').getRange('A5:B100').setValues(templatevalues);
+  }
+  else if (subject == 'Math' && grade == '3-8'){
+    var newfile = DocsList.getFileById('1f3FmqV1raMHkpIcnb6SQwS8CbLiMXfb9KFHt78GZcZE').makeCopy(newName); //The id here is the id of the 14-15 Math network template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 3 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 4 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 5 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 6 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 7 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 8 Edits').getRange('A5:B100').setValues(templatevalues);
+  }
+  else if (subject == 'Math' && network == 'TEI' && grade == '3rd'){    
+    var newfile = DocsList.getFileById('1Idku4iSEpzFcM5fetNzMKvrJJCZwKt0-xPGxtL8Gres').makeCopy(newName); //The id here is the id of the 14-15 Math TEI template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  }
+    else if (subject == 'Math' && network == 'TEI' && grade == '4th'){    
+    var newfile = DocsList.getFileById('1Idku4iSEpzFcM5fetNzMKvrJJCZwKt0-xPGxtL8Gres').makeCopy(newName); //The id here is the id of the 14-15 Math TEI template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  }
+    else if (subject == 'Math' && network == 'TEI' && grade == '5th'){    
+    var newfile = DocsList.getFileById('1Idku4iSEpzFcM5fetNzMKvrJJCZwKt0-xPGxtL8Gres').makeCopy(newName); //The id here is the id of the 14-15 Math TEI template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  }
+    else if (subject == 'Math' && network == 'TEI' && grade == '6th'){    
+    var newfile = DocsList.getFileById('1Idku4iSEpzFcM5fetNzMKvrJJCZwKt0-xPGxtL8Gres').makeCopy(newName); //The id here is the id of the 14-15 Math TEI template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  }
+    else if (subject == 'Math' && network == 'TEI' && grade == '7th'){    
+    var newfile = DocsList.getFileById('1Idku4iSEpzFcM5fetNzMKvrJJCZwKt0-xPGxtL8Gres').makeCopy(newName); //The id here is the id of the 14-15 Math TEI template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  }
+  else if (subject == 'Math' && network == 'TEI' && grade == '8th'){    
+    var newfile = DocsList.getFileById('1Idku4iSEpzFcM5fetNzMKvrJJCZwKt0-xPGxtL8Gres').makeCopy(newName); //The id here is the id of the 14-15 Math TEI template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  }
+
+//For the ELA TEI template, the assessment info is filled into M-N instead of L-M because of the added 'Type of Feedback' Column  
+    else if (subject == 'ELA' && network == 'TEI' && grade == '3rd'){    
+    var newfile = DocsList.getFileById('1pdLivbjaukH58mKHn3G7eMfeMJUyn7tvbYvh2d5gzQQ').makeCopy(newName); //The id here is the id of the 14-15 Math TEI template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  }
+    else if (subject == 'ELA' && network == 'TEI' && grade == '4th'){    
+    var newfile = DocsList.getFileById('1pdLivbjaukH58mKHn3G7eMfeMJUyn7tvbYvh2d5gzQQ').makeCopy(newName); //The id here is the id of the 14-15 Math TEI template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  }
+    else if (subject == 'ELA' && network == 'TEI' && grade == '5th'){    
+    var newfile = DocsList.getFileById('1pdLivbjaukH58mKHn3G7eMfeMJUyn7tvbYvh2d5gzQQ').makeCopy(newName); //The id here is the id of the 14-15 Math TEI template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  }
+    else if (subject == 'ELA' && network == 'TEI' && grade == '6th'){    
+    var newfile = DocsList.getFileById('1pdLivbjaukH58mKHn3G7eMfeMJUyn7tvbYvh2d5gzQQ').makeCopy(newName); //The id here is the id of the 14-15 Math TEI template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  }
+    else if (subject == 'ELA' && network == 'TEI' && grade == '7th'){    
+    var newfile = DocsList.getFileById('1pdLivbjaukH58mKHn3G7eMfeMJUyn7tvbYvh2d5gzQQ').makeCopy(newName); //The id here is the id of the 14-15 Math TEI template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  }
+  else if (subject == 'ELA' && network == 'TEI' && grade == '8th'){    
+    var newfile = DocsList.getFileById('1pdLivbjaukH58mKHn3G7eMfeMJUyn7tvbYvh2d5gzQQ').makeCopy(newName); //The id here is the id of the 14-15 Math TEI template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  }
+
+//Gets the single-grade template for HS, 2nd, or Model Blueprint  
+  else if (subject == 'Math' && grade == '3rd'){
+    if(stage == 'Final Internal Proofed'){var newfile = DocsList.getFileById('1uVMMZ8N9fy_hmtEF_HSzAEqmShEWTy5IiTvUnUiLsSs').makeCopy(newName);
+     newfile.addToFolder(savefolder);
+     SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);} //The id here is the id of the 14-15 Math Single Grade Fatal Flaw template
+    else {
+      var newfile = DocsList.getFileById('12HAWF8-reTFbJP7_nZwvuIISkHpVWXDoj3EF6tZWXNA').makeCopy(newName); //The id here is the id of the 14-15 Math single grade template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+    }}
+    else if (subject == 'Math' && grade == '4th'){ 
+          if(stage == 'Final Internal Proofed'){var newfile = DocsList.getFileById('1uVMMZ8N9fy_hmtEF_HSzAEqmShEWTy5IiTvUnUiLsSs').makeCopy(newName);
+     newfile.addToFolder(savefolder);
+     SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);} //The id here is the id of the 14-15 Math Single Grade Fatal Flaw template
+      else {
+    var newfile = DocsList.getFileById('12HAWF8-reTFbJP7_nZwvuIISkHpVWXDoj3EF6tZWXNA').makeCopy(newName); //The id here is the id of the 14-15 Math single grade template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+      }}
+    else if (subject == 'Math' && grade == '5th'){  
+          if(stage == 'Final Internal Proofed'){var newfile = DocsList.getFileById('1uVMMZ8N9fy_hmtEF_HSzAEqmShEWTy5IiTvUnUiLsSs').makeCopy(newName);
+     newfile.addToFolder(savefolder);
+     SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);} //The id here is the id of the 14-15 Math Single Grade Fatal Flaw template
+      else {
+    var newfile = DocsList.getFileById('12HAWF8-reTFbJP7_nZwvuIISkHpVWXDoj3EF6tZWXNA').makeCopy(newName); //The id here is the id of the 14-15 Math single grade template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+      }}
+    else if (subject == 'Math' && grade == '6th'){   
+          if(stage == 'Final Internal Proofed'){var newfile = DocsList.getFileById('1uVMMZ8N9fy_hmtEF_HSzAEqmShEWTy5IiTvUnUiLsSs').makeCopy(newName);
+     newfile.addToFolder(savefolder);
+     SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);} //The id here is the id of the 14-15 Math Single Grade Fatal Flaw template
+      else{ 
+    var newfile = DocsList.getFileById('12HAWF8-reTFbJP7_nZwvuIISkHpVWXDoj3EF6tZWXNA').makeCopy(newName); //The id here is the id of the 14-15 Math single grade template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+      }}
+    else if (subject == 'Math' && grade == '7th'){   
+          if(stage == 'Final Internal Proofed'){var newfile = DocsList.getFileById('1uVMMZ8N9fy_hmtEF_HSzAEqmShEWTy5IiTvUnUiLsSs').makeCopy(newName);
+     newfile.addToFolder(savefolder);
+     SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);} //The id here is the id of the 14-15 Math Single Grade Fatal Flaw template
+      else{ 
+    var newfile = DocsList.getFileById('12HAWF8-reTFbJP7_nZwvuIISkHpVWXDoj3EF6tZWXNA').makeCopy(newName); //The id here is the id of the 14-15 Math single grade template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+      }}
+  else if (subject == 'Math' && grade == '8th'){    
+        if(stage == 'Final Internal Proofed'){var newfile = DocsList.getFileById('1uVMMZ8N9fy_hmtEF_HSzAEqmShEWTy5IiTvUnUiLsSs').makeCopy(newName);
+     newfile.addToFolder(savefolder);
+     SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);} //The id here is the id of the 14-15 Math Single Grade Fatal Flaw template
+    else{ 
+    var newfile = DocsList.getFileById('12HAWF8-reTFbJP7_nZwvuIISkHpVWXDoj3EF6tZWXNA').makeCopy(newName); //The id here is the id of the 14-15 Math single grade template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+    } }
+    else if (subject == 'Math' && grade == 'HS'){    
+          if(stage == 'Final Internal Proofed'){var newfile = DocsList.getFileById('1uVMMZ8N9fy_hmtEF_HSzAEqmShEWTy5IiTvUnUiLsSs').makeCopy(newName);
+     newfile.addToFolder(savefolder);
+     SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);} //The id here is the id of the 14-15 Math Single Grade Fatal Flaw template
+      else{ 
+    var newfile = DocsList.getFileById('12HAWF8-reTFbJP7_nZwvuIISkHpVWXDoj3EF6tZWXNA').makeCopy(newName); //The id here is the id of the 14-15 Math single grade template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+      }}
+    else if (subject == 'Math' && grade == '9th'){    
+      throw "Please select HS as the grade, not 9th, for Algebra 1.";
+  }
+    else if (subject == 'Math' && grade == '10th'){ 
+          if(stage == 'Final Internal Proofed'){var newfile = DocsList.getFileById('1uVMMZ8N9fy_hmtEF_HSzAEqmShEWTy5IiTvUnUiLsSs').makeCopy(newName);
+     newfile.addToFolder(savefolder);
+     SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);} //The id here is the id of the 14-15 Math Single Grade Fatal Flaw template
+      else{ 
+    var newfile = DocsList.getFileById('12HAWF8-reTFbJP7_nZwvuIISkHpVWXDoj3EF6tZWXNA').makeCopy(newName); //The id here is the id of the 14-15 Math single grade template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+      }}
+  else if (subject == 'Math' && grade == '2nd'){   
+        if(stage == 'Final Internal Proofed'){var newfile = DocsList.getFileById('1uVMMZ8N9fy_hmtEF_HSzAEqmShEWTy5IiTvUnUiLsSs').makeCopy(newName);
+     newfile.addToFolder(savefolder);
+     SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);} //The id here is the id of the 14-15 Math Single Grade Fatal Flaw template
+    else{ 
+    var newfile = DocsList.getFileById('12HAWF8-reTFbJP7_nZwvuIISkHpVWXDoj3EF6tZWXNA').makeCopy(newName); //The id here is the id of the 14-15 Math single grade template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+    } }
+
+
+  else if (subject == 'ELA' && grade == '3rd'){ 
+if(stage == 'Final Internal Proofed'){var newfile = DocsList.getFileById('1KSzYzRW_p3R2X9JMjFsGcnyEim2w_jyLNIKDJYq-gzQ').makeCopy(newName);
+     newfile.addToFolder(savefolder);
+     SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);} //The id here is the id of the 14-15 ELA Single Grade Fatal Flaw template
+    else{
+    var newfile = DocsList.getFileById('1-US2KOS9kGrxYTWiisIs_IDvkDFkVHZ7FjMeymeu-rM').makeCopy(newName); //The id here is the id of the 14-15 ELA single grade template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  } 
+  }
+   else if (subject == 'ELA' && grade == '4th'){ 
+if(stage == 'Final Internal Proofed'){var newfile = DocsList.getFileById('1KSzYzRW_p3R2X9JMjFsGcnyEim2w_jyLNIKDJYq-gzQ').makeCopy(newName);
+     newfile.addToFolder(savefolder);
+     SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);} //The id here is the id of the 14-15 ELA Single Grade Fatal Flaw template
+    else{
+     var newfile = DocsList.getFileById('1-US2KOS9kGrxYTWiisIs_IDvkDFkVHZ7FjMeymeu-rM').makeCopy(newName); //The id here is the id of the 14-15 ELA single grade template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  } 
+   }
+   else if (subject == 'ELA' && grade == '5th'){ 
+if(stage == 'Final Internal Proofed'){var newfile = DocsList.getFileById('1KSzYzRW_p3R2X9JMjFsGcnyEim2w_jyLNIKDJYq-gzQ').makeCopy(newName);
+     newfile.addToFolder(savefolder);
+     SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);} //The id here is the id of the 14-15 ELA Single Grade Fatal Flaw template
+    else{
+     var newfile = DocsList.getFileById('1-US2KOS9kGrxYTWiisIs_IDvkDFkVHZ7FjMeymeu-rM').makeCopy(newName); //The id here is the id of the 14-15 ELA single grade template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  } 
+   }
+   else if (subject == 'ELA' && grade == '6th'){ 
+if(stage == 'Final Internal Proofed'){var newfile = DocsList.getFileById('1KSzYzRW_p3R2X9JMjFsGcnyEim2w_jyLNIKDJYq-gzQ').makeCopy(newName);
+     newfile.addToFolder(savefolder);
+     SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);} //The id here is the id of the 14-15 ELA Single Grade Fatal Flaw template
+    else{
+     var newfile = DocsList.getFileById('1-US2KOS9kGrxYTWiisIs_IDvkDFkVHZ7FjMeymeu-rM').makeCopy(newName); //The id here is the id of the 14-15 ELA single grade template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  } 
+   }
+   else if (subject == 'ELA' && grade == '7th'){ 
+if(stage == 'Final Internal Proofed'){var newfile = DocsList.getFileById('1KSzYzRW_p3R2X9JMjFsGcnyEim2w_jyLNIKDJYq-gzQ').makeCopy(newName);
+     newfile.addToFolder(savefolder);
+     SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);} //The id here is the id of the 14-15 ELA Single Grade Fatal Flaw template
+    else{
+     var newfile = DocsList.getFileById('1-US2KOS9kGrxYTWiisIs_IDvkDFkVHZ7FjMeymeu-rM').makeCopy(newName); //The id here is the id of the 14-15 ELA single grade template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  } 
+   }
+   else if (subject == 'ELA' && grade == '8th'){ 
+if(stage == 'Final Internal Proofed'){var newfile = DocsList.getFileById('1KSzYzRW_p3R2X9JMjFsGcnyEim2w_jyLNIKDJYq-gzQ').makeCopy(newName);
+     newfile.addToFolder(savefolder);
+     SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);} //The id here is the id of the 14-15 ELA Single Grade Fatal Flaw template
+    else{
+     var newfile = DocsList.getFileById('1-US2KOS9kGrxYTWiisIs_IDvkDFkVHZ7FjMeymeu-rM').makeCopy(newName); //The id here is the id of the 14-15 ELA single grade template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  } 
+   }
+   else if (subject == 'ELA' && grade == '9th'){ 
+if(stage == 'Final Internal Proofed'){var newfile = DocsList.getFileById('1KSzYzRW_p3R2X9JMjFsGcnyEim2w_jyLNIKDJYq-gzQ').makeCopy(newName);
+     newfile.addToFolder(savefolder);
+     SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);} //The id here is the id of the 14-15 ELA Single Grade Fatal Flaw template
+    else{
+     var newfile = DocsList.getFileById('1-US2KOS9kGrxYTWiisIs_IDvkDFkVHZ7FjMeymeu-rM').makeCopy(newName); //The id here is the id of the 14-15 ELA single grade template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  } 
+   }
+  else if (subject == 'ELA' && grade == '10th'){ 
+if(stage == 'Final Internal Proofed'){var newfile = DocsList.getFileById('1KSzYzRW_p3R2X9JMjFsGcnyEim2w_jyLNIKDJYq-gzQ').makeCopy(newName);
+     newfile.addToFolder(savefolder);
+     SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);} //The id here is the id of the 14-15 ELA Single Grade Fatal Flaw template
+    else{
+    var newfile = DocsList.getFileById('1-US2KOS9kGrxYTWiisIs_IDvkDFkVHZ7FjMeymeu-rM').makeCopy(newName); //The id here is the id of the 14-15 ELA single grade template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  }
+  }
+  else if (subject == 'ELA' && grade == '2nd'){ 
+if(stage == 'Final Internal Proofed'){var newfile = DocsList.getFileById('1KSzYzRW_p3R2X9JMjFsGcnyEim2w_jyLNIKDJYq-gzQ').makeCopy(newName);
+     newfile.addToFolder(savefolder);
+     SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);} //The id here is the id of the 14-15 ELA Single Grade Fatal Flaw template
+    else{
+    var newfile = DocsList.getFileById('1-US2KOS9kGrxYTWiisIs_IDvkDFkVHZ7FjMeymeu-rM').makeCopy(newName); //The id here is the id of the 14-15 ELA single grade template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Edits').getRange('A5:B100').setValues(templatevalues);
+  }
+  }
+
+//Gets the network template for grades 3-8
+else if (subject == 'ELA' && stage == 'Final Internal Proofed' && grade == '3-8'){
+    var newfile = DocsList.getFileById('19sURzve-YKekMH_q_oOXpqXNvtobCRIYKHfLmMHu7lY').makeCopy(newName); //The id here is the id of the 14-15 ELA network template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Grade 3 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 4 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 5 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 6 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 7 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 8 Edits').getRange('A5:B100').setValues(templatevalues);
+  }  
+  
+else if (subject == 'ELA' && grade == '3-8'){
+    var newfile = DocsList.getFileById('19a__HGXpFZi82Ei3INvnH9lkloxC6qGsKYIuClhqqaY').makeCopy(newName); //The id here is the id of the 14-15 ELA network template found in Assessment Resources folder
+  newfile.addToFolder(savefolder);
+  SpreadsheetApp.open(newfile).getSheetByName('Grade 3 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 4 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 5 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 6 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 7 Edits').getRange('A5:B100').setValues(templatevalues);
+    SpreadsheetApp.open(newfile).getSheetByName('Grade 8 Edits').getRange('A5:B100').setValues(templatevalues);
+  }
+//Here is where the motivational box comes from. To make a line break type \\n and to make an apostrophe type \'
+//You can always run the script without any boxes filled out to check message box
+  Browser.msgBox('And running anchor for the final lap, it\'s MICHIGAN!\\n\\nDon\'t forget to clear the white cells once you are done.');
+}
