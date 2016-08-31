@@ -1,0 +1,207 @@
+Sub MathNetworkDistractorGuideFormat()
+'
+' MathNetworkDistractorGuideFormat Macro
+'
+
+' This makes it so you don't have to see the macro updating, makes it faster and you less dizzy
+	Application.ScreenUpdating = False
+' Replaces 'Rubric' with 'Scoring Guide' in the correct answer column
+   	Cells.Replace What:="Rubric", Replacement:="Scoring Guide", LookAt:= _
+   	xlPart, SearchOrder:=xlByRows, MatchCase:=False, SearchFormat:=False, _
+   	ReplaceFormat:=False
+
+' Deletes the appropriate columns, note that column letters change upon each deletion
+	Columns("B:C").Select
+	Selection.Delete Shift:=xlToLeft
+	Columns("D:H").Select
+	Selection.Delete Shift:=xlToLeft
+	Columns("G:M").Select
+' Resizes column and row
+	Selection.ColumnWidth = 22
+	Rows("1:1").RowHeight = 100.5
+  	 
+' Formats title and column headers and puts them on all pages
+	Rows("2:2").Select
+	Selection.RowHeight = 66
+	Cells.Select
+	Application.PrintCommunication = False
+	With ActiveSheet.PageSetup
+   	.PrintTitleRows = "$1:$2"
+   	.PrintTitleColumns = ""
+	End With
+
+	Application.PrintCommunication = True
+	ActiveSheet.PageSetup.PrintArea = ""
+	Application.PrintCommunication = False
+   	With ActiveSheet.PageSetup
+   	.LeftHeader = ""
+   	.CenterHeader = ""
+   	.RightHeader = "&G"
+   	.LeftFooter = ""
+   	.CenterFooter = ""
+   	.RightFooter = "&""Lato,Italic""Copyright © 2015 Achievement Network."
+   	.LeftMargin = Application.InchesToPoints(0.25)
+   	.RightMargin = Application.InchesToPoints(0.25)
+   	.TopMargin = Application.InchesToPoints(0.25)
+   	.BottomMargin = Application.InchesToPoints(0.5)
+   	.HeaderMargin = Application.InchesToPoints(0.25)
+   	.FooterMargin = Application.InchesToPoints(0.25)
+   	.PrintHeadings = False
+   	.PrintGridlines = False
+   	.PrintComments = xlPrintNoComments
+   	.CenterHorizontally = True
+   	.CenterVertically = False
+   	.Orientation = xlLandscape
+   	.Draft = False
+   	.PaperSize = xlPaperA4
+   	.FirstPageNumber = xlAutomatic
+   	.Order = xlOverThenDown
+   	.BlackAndWhite = False
+   	.Zoom = False
+   	.FitToPagesWide = 1
+   	.FitToPagesTall = False
+   	.PrintErrors = xlPrintErrorsDisplayed
+   	.OddAndEvenPagesHeaderFooter = False
+   	.DifferentFirstPageHeaderFooter = False
+   	.ScaleWithDocHeaderFooter = True
+   	.AlignMarginsHeaderFooter = False
+   	.EvenPage.LeftHeader.Text = ""
+   	.EvenPage.CenterHeader.Text = ""
+   	.EvenPage.RightHeader.Text = ""
+   	.EvenPage.LeftFooter.Text = ""
+   	.EvenPage.CenterFooter.Text = ""
+   	.EvenPage.RightFooter.Text = ""
+   	.FirstPage.LeftHeader.Text = ""
+   	.FirstPage.CenterHeader.Text = ""
+   	.FirstPage.RightHeader.Text = ""
+   	.FirstPage.LeftFooter.Text = ""
+   	.FirstPage.CenterFooter.Text = ""
+   	.FirstPage.RightFooter.Text = ""
+	End With
+	Application.PrintCommunication = True
+
+'Resizes columns	
+	Columns("A").ColumnWidth = 8.3
+	Columns("B").ColumnWidth = 9
+	Columns("C").ColumnWidth = 35
+	Columns("D").ColumnWidth = 6
+	Columns("E").ColumnWidth = 13
+	Columns("F").ColumnWidth = 9
+   
+	Rows("2:100").EntireRow.AutoFit
+
+' Inserts ANet logo saved locally
+	ActiveSheet.PageSetup.RightHeaderPicture.Filename = _
+	"C:\Users\username\Folder That Never Moves\ANET_logo_DG.eps"
+
+'Splits first column into two columns   
+	Call SplitItemIDandQNumber
+	
+' Sets font to Lato
+	Cells.Select
+	With Selection.Font
+   	.Name = "Lato"
+	End With
+   
+' Replaces 'open response' with 'constructed response'
+	Cells.Replace What:="Open Response", Replacement:="Constructed Response", _
+   	LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, SearchFormat:= _
+   	False, ReplaceFormat:=False
+
+' Saves pdf version of the file in the same folder as the Excel version is saved      	 
+	Call SavePDF
+
+End Sub
+
+Sub SplitItemIDandQNumber()
+'
+' Part of EditorDG Macro
+'
+' Keyboard Shortcut: Ctrl+Shift+E
+'
+
+' Splits apart Item ID and Question Number to be in seperate columns, must work around merged cells
+	Range("A1:I1").Select
+	With Selection
+   	.HorizontalAlignment = xlGeneral
+   	.VerticalAlignment = xlCenter
+   	.WrapText = True
+   	.Orientation = 0
+   	.AddIndent = False
+   	.IndentLevel = 0
+   	.ShrinkToFit = False
+   	.ReadingOrder = xlContext
+   	.MergeCells = True
+	End With
+	Selection.UnMerge
+	Range("A1").Select
+	Selection.Cut
+	Range("C1").Select
+	ActiveSheet.Paste
+	Columns("B:B").Select
+	Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+	Columns("A:A").Select
+	Selection.Replace What:=")", Replacement:="", LookAt:=xlPart, _
+   	SearchOrder:=xlByRows, MatchCase:=False, SearchFormat:=False, _
+   	ReplaceFormat:=False
+	Selection.TextToColumns Destination:=Range("A1"), DataType:=xlDelimited, _
+   	TextQualifier:=xlDoubleQuote, ConsecutiveDelimiter:=False, Tab:=False, _
+   	Semicolon:=False, Comma:=False, Space:=False, Other:=True, OtherChar _
+   	:="(", FieldInfo:=Array(Array(1, 1), Array(2, 1)), TrailingMinusNumbers:=True
+	Range("D1").Select
+	Selection.Cut
+	Range("A1").Select
+	ActiveSheet.Paste
+	Range("A1:K1").Select
+	With Selection.Font
+   	.Name = "Lato"
+   	.Size = 14
+   	.Strikethrough = False
+   	.Superscript = False
+   	.Subscript = False
+   	.OutlineFont = False
+   	.Shadow = False
+   	.Underline = xlUnderlineStyleSingle
+   	.ColorIndex = xlAutomatic
+   	.TintAndShade = 0
+   	.ThemeFont = xlThemeFontMinor
+	End With
+	Selection.Font.Underline = xlUnderlineStyleNone
+	Selection.Font.Bold = True
+	Selection.Merge True
+	Selection.HorizontalAlignment = xlLeft
+End Sub
+
+' Saves pdf version of the file in the same location with the same filename
+Sub SavePDF()
+
+	Dim FSO As Object
+	Dim s(1) As String
+	Dim sNewFilePath As String
+   
+	Set FSO = CreateObject("Scripting.FileSystemObject")
+	s(0) = ActiveWorkbook.FullName
+   
+	If FSO.FileExists(s(0)) Then
+   	'//Change Excel Extension to PDF extension in FilePath
+   	s(1) = FSO.GetExtensionName(s(0))
+   	If s(1) <> "" Then
+       	s(1) = "." & s(1)
+       	sNewFilePath = Replace(s(0), s(1), ".pdf")
+      	 
+       	'//Export to PDF with new File Path
+       	ActiveWorkbook.Sheets.Select
+       	ActiveSheet.ExportAsFixedFormat _
+           	Type:=xlTypePDF, _
+           	Filename:=sNewFilePath, _
+           	Quality:=xlQualityMinimum, IncludeDocProperties:=True, _
+           	IgnorePrintAreas:=False, OpenAfterPublish:=True
+   	End If
+	Else
+   	'//Error: file path not found
+   	MsgBox "Error: this workbook may be unsaved.  Please save and try again."
+	End If
+   
+	Set FSO = Nothing
+
+End Sub
